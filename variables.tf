@@ -52,7 +52,7 @@ variable "tags" {
 #Description : Terraform Lightsail module variables.
 variable "availability_zone" {
   type        = string
-  default     = "ap-south-1a"
+  default     = "us-east-1a"
   description = "The Availability Zone in which to create your instance"
   sensitive   = true
 }
@@ -66,7 +66,7 @@ variable "blueprint_id" {
 
 variable "bundle_id" {
   type        = string
-  default     = "micro_2_1"
+  default     = "micro_2_0"
   description = "The bundle of specification information"
   sensitive   = true
 }
@@ -105,6 +105,15 @@ variable "key_pair_name" {
   sensitive   = true
 }
 
+variable "port_info" {
+  type = list(object({
+    protocol = string
+    port     = number
+    cidrs    = list(string)
+  }))
+  default = null
+}
+
 variable "instance_count" {
   type        = number
   default     = 1
@@ -135,4 +144,10 @@ variable "key_path" {
   default     = ""
   description = "Public key path  (e.g. `~/.ssh/id_rsa.pub`)."
   sensitive   = true
+}
+
+variable "domain_name" {
+  type = string
+  default = "www.com"
+  description = "This is the name of the resource."
 }
